@@ -1,0 +1,32 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalación de paquetes necesarios, limpieza de cache y archivos temporales
+RUN apt-get update && \
+    apt-get install -y python3 nano net-tools openssh-server sudo openssl tcpdump iputils-ping apt-transport-https curl nginx && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Creamos el nuevo usuario con su contraseña
+RUN useradd -m -s /bin/bash -g root -G sudo -u 1000 cognet && \
+    echo "cognet:supercognet" | chpasswd
+
+# Crea los directorios necesarios
+RUN mkdir -p /etc/nginx/sites-enabled && \
+    mkdir -p /etc/nginx/sites-available
+
+# Copia el archivo proxy.conf al directorio sites-available
+COPY proxy/proxy.conf /etc/nginx/sites-available/proxy.conf
+
+# Crea un enlace simbólico en sites-enabled
+RUN ln -s /etc/nginx/sites-available/proxy.conf /etc/nginx/sites-enabled/
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /home/cognet
+
+COPY proxy/nginx.conf /etc/nginx/nginx.conf
+COPY certs/ /etc/nginx/certs/
+
+# Inicia nginx en primer plano para evitar cierre de contenedor
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,31 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalación de paquetes necesarios
+RUN apt-get update && \
+    apt-get install -y curl python3 nano net-tools openssh-server sudo openssl tcpdump iputils-ping apt-transport-https gnupg2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Descargar e instalar Caddy
+RUN curl -o /usr/bin/caddy -fsSL "https://caddyserver.com/api/download?os=linux&arch=amd64&idempotency=123456" && \
+    chmod +x /usr/bin/caddy
+
+# Creamos el nuevo usuario con su contraseña
+RUN useradd -m -s /bin/bash -g root -G sudo -u 1000 cognet && \
+    echo "cognet:supercognet" | chpasswd
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /home/cognet
+
+# Copiamos los archivos de configuración de Caddy y certificados
+COPY caddy/Caddyfile /etc/caddy/Caddyfile
+COPY caddy/index.html /home/cognet/
+COPY certs/ /etc/caddy/
+
+# Formatea Caddyfile al construir la imagen
+#RUN /usr/bin/caddy fmt --overwrite
+
+# Comando para ejecutar Caddy en primer plano
+CMD ["/usr/bin/caddy", "run", "--config", "/etc/caddy/Caddyfile"]

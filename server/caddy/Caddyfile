@@ -1,0 +1,20 @@
+http://11.0.1.1 {
+        # Set this path to your site's directory.
+        root * /home/cognet
+
+        # Enable the static file server.
+       file_server {
+            index index.html
+        }
+}
+
+https://11.0.1.1 {
+    tls /etc/caddy/caddy.crt /etc/caddy/caddy.key
+        # Set this path to your site's directory.
+        root * /home/cognet
+
+        # Enable the static file server.
+       file_server {
+            index index.html
+        }
+}

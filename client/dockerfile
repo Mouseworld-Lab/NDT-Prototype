@@ -1,0 +1,20 @@
+FROM ubuntu:18.04
+
+# Instalación de paquetes necesarios, limpieza de cache y archivos temporales
+RUN apt-get update && \
+    apt-get install -y python3 nano wget vim sudo net-tools openssh-server curl python3-pip tcpdump \
+    iputils-ping iproute2 traceroute iperf3 python3.7 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* 
+
+# Creamos el nuevo usuario con su contraseña y lanzamos el servicio ssh
+RUN useradd -m -s /bin/bash -g root -G sudo -u 1000 cognet  && \
+echo "cognet:supercognet" | chpasswd && \
+service ssh start
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /home/cognet
+
+COPY client/wgetrc /etc/wgetrc
+# Permite que el contenedor se quede en ejecución
+CMD [ "tail", "-f", "/dev/null" ]
