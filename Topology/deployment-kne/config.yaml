@@ -33,5 +33,6 @@
     - name: Start dumps
       shell: kubectl exec -n network {{ item.pod }} -- tcpdump -i {{ item.interface }} -w /home/{{ item.pod }}_{{ item.interface }}.pcap
       loop:
-        - { pod: "server", interface: "eth1" }
+        - { pod: "server", interface: "eth1" , filter: "port 80"}
+        - { pod: "server", interface: "eth1" , filter: "port 443"}
         
