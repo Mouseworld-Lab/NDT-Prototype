@@ -5,7 +5,7 @@ items:
   kind: Topology
   metadata:
     name: gateway2
-    namespace: network-transport-prueba
+    namespace: network-transport
   spec:
     links:
     - uid: 1

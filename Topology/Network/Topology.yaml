@@ -1,4 +1,4 @@
-name: network-transport-prueba
+name: network
 nodes:
 - name: ceos1
   model: ceos

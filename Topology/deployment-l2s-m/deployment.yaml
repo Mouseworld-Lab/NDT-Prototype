@@ -1,0 +1,19 @@
+--
+- name: Topology Deployment using kne
+  hosts: localhost
+  gather_facts: no
+  tasks: 
+ #--------------------------------------------Deploy kne---------------------------------------------------------------------------
+ # Configure the path where the kne topology file 
+    - name: Deploy vxlan-1
+      shell: kubectl apply -f ~/L2S-M/
+
+    - name: config map
+      shell: kubectl create configmap gateway2-config --from-file=/home/mw/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/configuracion/gateway2-config.py -n network # Modified -n <name descriptor>
+
+    - name: Deploy gateway2
+      shell: kubectl apply -f ~/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/gateway2.yaml
+
+    - name: Wait for 20 seconds
+      pause:
+        seconds: 20
