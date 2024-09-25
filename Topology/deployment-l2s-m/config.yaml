@@ -1,0 +1,20 @@
+---
+- name: Edge Configuration
+  hosts: localhost
+  gather_facts: no    
+  tasks:
+      
+#---------------------------------------server configuration----------------------------------------------------------------------------------------------
+
+    - name: Start nginx
+      shell: kubectl exec -it proxy -- nginx
+
+
+#---------------------------------------tcpdump in proxy----------------------------------------------------------------------------------------------
+
+    - name: Start dumps
+      shell: kubectl exec {{ item.pod }} -- tcpdump -i {{ item.interface }} -w /home/{{ item.pod }}_{{ item.interface }}.pcap
+      loop:
+        - { pod: "proxy", interface: "net1" , filter: "port 443" }
+        - { pod: "proxy", interface: "net2" , filter: "port 80" }
+        

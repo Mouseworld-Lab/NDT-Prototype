@@ -6,13 +6,19 @@
  #--------------------------------------------Deploy kne---------------------------------------------------------------------------
  # Configure the path where the kne topology file 
     - name: Deploy vxlan-1
-      shell: kubectl apply -f ~/L2S-M/
+      shell: kubectl apply -f ~/L2S-M/edge/vxlan-1.yaml
 
-    - name: config map
-      shell: kubectl create configmap gateway2-config --from-file=/home/mw/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/configuracion/gateway2-config.py -n network # Modified -n <name descriptor>
+   - name: Deploy network multus
+      shell: kubectl create -f ~/L2S-M/edge/v-network-1.yaml 
 
-    - name: Deploy gateway2
-      shell: kubectl apply -f ~/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/gateway2.yaml
+    - name: deploy ned
+      shell: kubectl apply -f ~/L2S-M/edge/ned.yaml
+
+    - name: Deploy proxy
+      shell: kkubectl apply -f ~/L2S-M/edge/proxy.yaml
+
+    - name: Deploy client
+      shell: kkubectl apply -f ~/L2S-M/edge/clients.yaml
 
     - name: Wait for 20 seconds
       pause:

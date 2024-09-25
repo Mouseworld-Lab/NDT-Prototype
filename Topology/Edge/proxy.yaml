@@ -7,18 +7,13 @@ metadata:
   annotations:
     k8s.v1.cni.cncf.io/networks: v-network-1, v-network-2
 spec:
-  # securityContext:
-  #  sysctls:
-  #       - name: net.ipv4.ip_forward
-  #         value: "1"
   containers:
   - name: proxy
     command: ["/bin/ash", "-c"]
-    args: ["echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf && sysctl -p &&  ip addr add 10.0.1.15/24 dev net1 && ip addr add 10.0.2.1/24 dev net2 &&
+    args: ["echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf && sysctl -p &&  ip addr add 10.0.1.15/24 dev net1 && ip addr add 10.0.2.1/24 dev net2 && ip route del default && ip route add default via 10.0.1.20 dev net1 &&
             trap : TERM INT; sleep infinity & wait"]
-    image: alpine:latest
+    image: ghcr.io/yennym3/proxy:latest
     securityContext:
       privileged: true
       capabilities:
         add: ["NET_ADMIN"]
-  #nodeName: test-l2sm-uc3m-polito-2
