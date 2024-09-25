@@ -156,7 +156,7 @@ nodes:
   config:
     config_path: /home/cognet
     config_file: gateway1-config.py
-    file: /configuracion/gateway1-config.py
+    file: /configuration/gateway1-config.py
     image: ghcr.io/yennym3/gateway:latest
   interfaces:
     eth1:
@@ -166,7 +166,7 @@ nodes:
   config:
     config_path: /home/cognet
     config_file: server-config.py
-    file: /configuracion/server-config.py
+    file: /configuration/server-config.py
     image: ghcr.io/yennym3/server:latest
   interfaces:
     eth1:
