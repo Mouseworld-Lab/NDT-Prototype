@@ -9,7 +9,7 @@
       shell: kne create ~/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/Topology.yaml 
 
     - name: config map
-      shell: kubectl create configmap gateway2-config --from-file=/home/mw/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/configuracion/gateway2-config.py -n network # Modified -n <name descriptor>
+      shell: kubectl create configmap gateway2-config --from-file=/home/mw/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/configuration/gateway2-config.py -n network # Modified -n <name descriptor>
 
     - name: Deploy gateway2
       shell: kubectl apply -f ~/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/gateway2.yaml
