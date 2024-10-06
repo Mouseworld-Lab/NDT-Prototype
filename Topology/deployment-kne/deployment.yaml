@@ -6,13 +6,14 @@
  #--------------------------------------------Deploy kne---------------------------------------------------------------------------
  # Configure the path where the kne topology file 
     - name: Deploy topology
-      shell: kne create ~/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/Topology.yaml 
+      shell: kne create ~/NDT-Prototype/Topology/Network/Topology.yaml 
 
+# If the topology name has changed, use the new name with -n <new-name>
     - name: config map
-      shell: kubectl create configmap gateway2-config --from-file=/home/mw/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/configuration/gateway2-config.py -n network # Modified -n <name descriptor>
+      shell: kubectl create configmap gateway2-config --from-file=~/NDT-Prototype/Topology/Network/configuration/gateway2-config.py -n network 
 
     - name: Deploy gateway2
-      shell: kubectl apply -f ~/oldk8controller/k8cont/kne/examples/arista/NDT-prototype/Network/gateway2.yaml
+      shell: kubectl apply -f  ~/NDT-Prototype/Topology/Network/gateway2.yaml
 
     - name: Wait for 20 seconds
       pause:
