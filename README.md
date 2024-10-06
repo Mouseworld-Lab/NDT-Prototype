@@ -67,13 +67,92 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 
 
 # NDT Deployment Guide
-The following steps provides a guide for deploying the NDT prototype, including the Edge. Follow the steps below:
-- ###  Deploy Network using KNE 
-    To proceed with the next steps, you should have a functional Kubernetes cluster with KNE installed and operational for topology creation. For detailed installation instructions, please refer to the official guide in the repository [KNE](https://github.com/openconfig/kne/blob/main/docs/setup.md)
+The following steps provides a guide for deploying the NDT prototype, including the Edge. Before deploying the NDT prototype, it's necessary to establish connections between the machines. Follow the steps below:
 
-    1. 
-- ###  Deploy Edge using L2S-M
+## Configuration on the Machine Hosting KNE Pods:
 
-    Make sure your Kubernetes cluster is properly set up and that L2S-M is installed and operational. For comprehensive installation instructions, please refer to the official guide: L2S-M Installation Guide.
+- #### Create a veth Pair
+    Run the following commands to create a pair of virtual Ethernet interfaces:
+    ```
+    sudo ip link add veth0 type veth peer name veth1
+    sudo ip link set veth1 up
+    sudo ip link set veth2 up
+    ```
+- #### Create a VXLAN Interface
+    Create a VXLAN interface with the following command, replacing <remote-ip> with the IP address of the remote host:
+    ```
+    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote <remote-ip>
+    sudo ip link set vxlan-1 up
+    ```
+- #### Create a Bridge and Add Interfaces:
+    1. Install the bridge utilities package (if not already installed):
+        ```
+        sudo apt-get install bridge-utils
+        ```
+    2. Create a new bridge interface:
+         ```
+        sudo brctl addbr br0
+         ```
+    3. Add one end of the veth pair (veth2) and vxlan to the bridge:
+        ```
+        sudo brctl addif br0 veth2
+        sudo brctl addif br0 vxlan-1
+        ```
+    > **Note:** : Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
+
+## Configuration on the Edge Machine:
+- #### Create a VXLAN Interface
+    Create a VXLAN interface with the following command, replacing <remote-ip> with the IP address of the remote host:
+    ```
+    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote <remote-ip>
+    sudo ip link set vxlan-1 up
+    ```
     
-    1. 
+Once you have configured the connection between the machines, you can continue with the guide to proceed with the deployment of the NDT prototype:
+
+###  Deploy Network using KNE 
+
+To proceed with the next steps, you should have a functional Kubernetes cluster with KNE installed and operational for topology creation. For detailed installation instructions, please refer to the official guide in the repository [KNE](https://github.com/openconfig/kne/blob/main/docs/setup.md)
+
+#### 1. Clone this repository from the cluster controller:
+```bash
+git clone <repository-url>
+```
+#### 2. Install Ansible:
+Using Ansible we have automated the deployment of the scenario. Therefore, You must have Ansible is already installed inside the machine where you want to deploy the topology If this is not the case:
+```bash
+sudo apt install ansible
+```
+#### 3. To deploy of the topology execute the `deployment.yaml` file using the following command:
+```bash
+ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/deployment.yaml
+```
+#### 4. To configure the pods in the topology execute the `config.yaml` file using the following command:
+```bash
+ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/config.yaml
+```
+    
+    
+###  Deploy Edge using L2S-M
+
+Make sure your Kubernetes cluster is properly set up and that L2S-M is installed and operational. For comprehensive installation instructions, please refer to the official guide: L2S-M Installation Guide.
+    
+#### 1. To deploy of the pods execute the `deployment.yaml` file using the following command:
+```bash
+ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/deployment.yaml
+```
+
+#### 2. To start the proxy and filter packets on the corresponding interfaces for ports 80 and 443, execute the `config.yaml` file using the following command:
+
+```bash
+ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/config.yaml
+```
+
+
+
+
+
+
+
+
+
