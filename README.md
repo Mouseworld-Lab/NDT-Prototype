@@ -110,7 +110,7 @@ The following steps provides a guide for deploying the NDT prototype, including 
     
 Once you have configured the connection between the machines, you can continue with the guide to proceed with the deployment of the NDT prototype:
 
-###  Deploy Network using KNE 
+##  Deploy Network using KNE 
 
 To proceed with the next steps, you should have a functional Kubernetes cluster with KNE installed and operational for topology creation. For detailed installation instructions, please refer to the official guide in the repository [KNE](https://github.com/openconfig/kne/blob/main/docs/setup.md)
 
@@ -133,7 +133,7 @@ ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/config.yaml
 ```
     
     
-###  Deploy Edge using L2S-M
+## Deploy Edge using L2S-M
 
 Make sure your Kubernetes cluster is properly set up and that L2S-M is installed and operational. For comprehensive installation instructions, please refer to the official guide: L2S-M Installation Guide.
     
