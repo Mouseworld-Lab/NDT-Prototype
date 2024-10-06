@@ -10,6 +10,7 @@
 
    - name: Deploy network multus
       shell: kubectl create -f ~/L2S-M/edge/v-network-1.yaml 
+      shell: kubectl create -f ~/L2S-M/edge/v-network-2.yaml 
 
     - name: deploy ned
       shell: kubectl apply -f ~/L2S-M/edge/ned.yaml
