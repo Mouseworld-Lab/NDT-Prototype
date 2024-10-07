@@ -133,13 +133,13 @@ Make sure your Kubernetes cluster is properly set up and that L2S-M is installed
     
 #### 1. To deploy of the pods execute the `deployment.yaml` file using the following command:
 ```bash
-ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/deployment.yaml
+ansible-playbook ~/NDT-Prototype/Topology/deployment-l2s-m/deployment.yaml
 ```
 
 #### 2. To start the proxy and filter packets on the corresponding interfaces for ports 80 and 443, execute the `config.yaml` file using the following command:
 
 ```bash
-ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/config.yaml
+ansible-playbook ~/NDT-Prototype/Topology/deployment-l2s-m/config.yaml
 ```
 
 

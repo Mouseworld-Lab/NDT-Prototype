@@ -13,25 +13,25 @@
       shell: kubectl exec -it -n network gateway1 -- python3 gateway1-config.py
 
     - name: Configure gateway2
-      shell: kubectl exec -n network gateway2 -- python3 gateway2-config.py
+      shell: kubectl exec -it -n network gateway2 -- python3 gateway2-config.py
 
       
 #---------------------------------------server configuration----------------------------------------------------------------------------------------------
 
     - name: Start caddy
-      shell: kubectl exec -n network server -- caddy run --config /etc/caddy/Caddyfile &
+      shell: kubectl exec -it -n network server -- caddy run --config /etc/caddy/Caddyfile &
 
 
 #---------------------------------------debug conection----------------------------------------------------------------------------------------------
 
     - name: Debug gateway2 connection
-      shell: kubectl exec -n network gateway2 -- /bin/bash -c 'until ping -c 1 -i 20 11.0.1.1; do :; done; exit 0'
+      shell: kubectl exec -it -n network gateway2 -- /bin/sh -c 'until ping -c 1 -i 20 11.0.1.1; do :; done; exit 0'
       ignore_errors: yes
 
 #---------------------------------------tcpdump in server----------------------------------------------------------------------------------------------
 
     - name: Start dumps
-      shell: kubectl exec -n network {{ item.pod }} -- tcpdump -i {{ item.interface }} -w /home/{{ item.pod }}_{{ item.interface }}.pcap
+      shell: kubectl exec -it -n network {{ item.pod }} -- tcpdump -i {{ item.interface }} -w /home/{{ item.pod }}_{{ item.interface }}.pcap
       loop:
         - { pod: "server", interface: "eth1" , filter: "port 80"}
         - { pod: "server", interface: "eth1" , filter: "port 443"}

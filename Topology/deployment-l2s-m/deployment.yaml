@@ -1,5 +1,5 @@
 --
-- name: Topology Deployment using kne
+- name: Deployment using L2S-M
   hosts: localhost
   gather_facts: no
   tasks: 
