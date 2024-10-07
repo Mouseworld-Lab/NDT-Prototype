@@ -1,19 +1,17 @@
---
+---
 - name: Topology Deployment using kne
   hosts: localhost
   gather_facts: no
   tasks: 
  #--------------------------------------------Deploy kne---------------------------------------------------------------------------
- # Configure the path where the kne topology file 
     - name: Deploy topology
-      shell: kne create ~/NDT-Prototype/Topology/Network/Topology.yaml 
+      shell: kne create ~/NDT-Prototype/Topology/Network/Topology.yaml  # Configure the path where the kne topology file is
 
-# If the topology name has changed, use the new name with -n <new-name>
     - name: config map
-      shell: kubectl create configmap gateway2-config --from-file=(echo ~/NDT-Prototype/Topology/Network/configuration/gateway2-config.py)-n network 
+      shell: kubectl create configmap gateway2-config --from-file=$(echo ~/NDT-Prototype/Topology/Network/configuration/gateway2-config.py) -n network
 
     - name: Deploy gateway2
-      shell: kubectl apply -f  ~/NDT-Prototype/Topology/Network/gateway2.yaml
+      shell: kubectl apply -f ~/NDT-Prototype/Topology/Network/gateway2.yaml
 
     - name: Wait for 20 seconds
       pause:

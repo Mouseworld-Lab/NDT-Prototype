@@ -17,11 +17,6 @@ To emulate the behavioral aspects of the transport network equipment, KNE (Kuber
 # Prerequisites
 
 ## KNE
-This guide assumes that a Kubernetes cluster has already been set up. The cluster should adhere to the following restrictions:
-
-- Use a pod networking add-on compatible with **MetalLB**.
-- Use **dockerd** as the Container Runtime Interface (CRI).
-
 ### Installation
 
 - For installing **KNE**, follow the instructions provided in the official repository: [KNE GitHub Repository](https://github.com/openconfig/kne).
@@ -40,8 +35,6 @@ This demo was tested on a 4-node cluster with the following configuration:
   The image must be converted and imported as a Docker container image.  _Tested with the cEOS-lab-4.29.2F model._
 
 ### L2S-M:
-This guide assumes that a Kubernetes cluster has already been set up.
-
 ### Installation
 
 - For installing **L2S-M**, follow the instructions provided in the official repository: [L2S-M GitHub Repository](https://github.com/Networks-it-uc3m/L2S-M/tree/main/deployments)
@@ -74,9 +67,9 @@ The following steps provides a guide for deploying the NDT prototype, including 
 - #### Create a veth Pair
     Run the following commands to create a pair of virtual Ethernet interfaces:
     ```
-    sudo ip link add veth0 type veth peer name veth1
-    sudo ip link set veth1 up
+    sudo ip link add veth2 type veth peer name veth3
     sudo ip link set veth2 up
+    sudo ip link set veth3 up
     ```
 - #### Create a VXLAN Interface
     Create a VXLAN interface with the following command, replacing <remote-ip> with the IP address of the remote host:
@@ -98,7 +91,7 @@ The following steps provides a guide for deploying the NDT prototype, including 
         sudo brctl addif br0 veth2
         sudo brctl addif br0 vxlan-1
         ```
-    > **Note:** : Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
+    > **Note:** Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
 
 ## Configuration on the Edge Machine:
 - #### Create a VXLAN Interface
