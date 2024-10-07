@@ -71,6 +71,7 @@ The following steps provides a guide for deploying the NDT prototype, including 
     sudo ip link set veth2 up
     sudo ip link set veth3 up
     ```
+ > **Note:** You must create the veth pair on the node that will host the pods of the topology.
 - #### Create a VXLAN Interface
     Create a VXLAN interface with the following command, replacing <remote-ip> with the IP address of the remote host:
     ```
