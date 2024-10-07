@@ -30,3 +30,4 @@ COPY certs/ /etc/nginx/certs/
 
 # Inicia nginx en primer plano para evitar cierre de contenedor
 CMD ["nginx", "-g", "daemon off;"]
+

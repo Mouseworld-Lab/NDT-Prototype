@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: client
-    command: ["/bin/ash", "-c", "ip a add 10.0.2.2/24 dev net1 && ip route del default && ip route add default via 10.0.2.1 dev net1 && trap : TERM INT; sleep infinity & wait"]
+    command: ["/bin/bash", "-c", "ip a add 10.0.2.2/24 dev net1 && ip route del default && ip route add default via 10.0.2.1 dev net1 && trap : TERM INT; sleep infinity & wait"]
     image: ghcr.io/yennym3/client:latest
     securityContext:
       capabilities:
