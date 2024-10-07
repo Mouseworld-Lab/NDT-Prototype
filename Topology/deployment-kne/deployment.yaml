@@ -10,7 +10,7 @@
 
 # If the topology name has changed, use the new name with -n <new-name>
     - name: config map
-      shell: kubectl create configmap gateway2-config --from-file=~/NDT-Prototype/Topology/Network/configuration/gateway2-config.py -n network 
+      shell: kubectl create configmap gateway2-config --from-file=NDT-Prototype/Topology/Network/configuration/gateway2-config.py -n network 
 
     - name: Deploy gateway2
       shell: kubectl apply -f  ~/NDT-Prototype/Topology/Network/gateway2.yaml
