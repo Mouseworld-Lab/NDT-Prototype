@@ -1,0 +1,9 @@
+---
+- name: Undeploy of topology using KNE
+  hosts: localhost
+  gather_facts: no
+  tasks: 
+ #--------------------------------------------Deploy kne---------------------------------------------------------------------------
+    - name: undeploy topology
+      shell: kne delete ~/NDT-Prototype/Topology/Network/Topology.yaml  # Configure the path where the kne topology file is
+
