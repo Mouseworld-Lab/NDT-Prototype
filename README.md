@@ -7,10 +7,10 @@ To emulate the behavioral aspects of the transport network equipment, KNE (Kuber
 
 # Table of Contents
 
-- [KNE and L2S-M Installation Guide](#kne-and-l2s-m-installation-guide):
+- [Prerequisites](#prerequisites):
   - [KNE](#kne)
   - [L2S-M](#l2s-m)
-- [Overview of the Demo](overview-of-the-Demo)
+- [Overview of the Demo](#overview-of-the-demo)
 - [Demo](#demo)
 - [ NDT Deployment Guide](#ndt-deployment-guide)
 
@@ -59,7 +59,7 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 
 ![scenario](images/PrototypeNDT.png)
 
-
+# Demo
 
 # NDT Deployment Guide
 The following steps provides a guide for deploying the NDT prototype, including the Edge. Before deploying the NDT prototype, it's necessary to establish connections between the machines. Follow the steps below:
