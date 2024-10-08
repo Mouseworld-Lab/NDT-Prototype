@@ -28,11 +28,3 @@
       shell: kubectl exec -it -n network gateway2 -- /bin/sh -c 'until ping -c 1 -i 20 11.0.1.1; do :; done; exit 0'
       ignore_errors: yes
 
-#---------------------------------------tcpdump in server----------------------------------------------------------------------------------------------
-
-    - name: Start dumps
-      shell: kubectl exec -it -n network {{ item.pod }} -- tcpdump -i {{ item.interface }} -w /home/{{ item.pod }}_{{ item.interface }}.pcap
-      loop:
-        - { pod: "server", interface: "eth1" , filter: "port 80"}
-        - { pod: "server", interface: "eth1" , filter: "port 443"}
-        
