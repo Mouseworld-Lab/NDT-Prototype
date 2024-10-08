@@ -57,6 +57,8 @@ The purpose of this demo is to showcase the first prototype of a Network Digital
 2. **Validation of the Demo**
 The demo demonstrates an HTTP request sent from the client at the Edge to the web server in the network. The request passes through a reverse proxy at the Edge, which converts the HTTP request to HTTPS. Consequently, the web server receives only HTTPS requests, while the client at the Edge operates over HTTP, ensuring secure communication between the Edge and the network.
 
+![scenario](images/PrototypeNDT.png)
+
 
 
 # NDT Deployment Guide
