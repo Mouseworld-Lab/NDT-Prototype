@@ -92,7 +92,9 @@ The following steps provides a guide for deploying the NDT prototype, including 
         sudo brctl addif br0 veth2
         sudo brctl addif br0 vxlan-1
         ```
-    > **Note:** Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
+    > **Note:** 
+    > 1. Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
+    > 2.  Has been tested on a cluster created with Kubeadm. If you plan to use it with other clusters, such as Kind, additional connections may need to be added.
 
 ## Configuration on the Edge Machine:
 - #### Create a VXLAN Interface
@@ -130,13 +132,23 @@ ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/config.yaml
 ## Deploy Edge using L2S-M
 
 Make sure your Kubernetes cluster is properly set up and that L2S-M is installed and operational. For comprehensive installation instructions, please refer to the official guide: L2S-M Installation Guide.
+
+#### 1. Clone this repository from the cluster controller:
+```bash
+git clone <repository-url>
+```
+#### 2. Install Ansible:
+Using Ansible we have automated the deployment of the scenario. Therefore, You must have Ansible is already installed inside the machine where you want to deploy the topology If this is not the case:
+```bash
+sudo apt install ansible
+```
     
-#### 1. To deploy of the pods execute the `deployment.yaml` file using the following command:
+#### 3. To deploy of the pods execute the `deployment.yaml` file using the following command:
 ```bash
 ansible-playbook ~/NDT-Prototype/Topology/deployment-l2s-m/deployment.yaml
 ```
 
-#### 2. To start the proxy and filter packets on the corresponding interfaces for ports 80 and 443, execute the `config.yaml` file using the following command:
+#### 4. To start the proxy and filter packets on the corresponding interfaces for ports 80 and 443, execute the `config.yaml` file using the following command:
 
 ```bash
 ansible-playbook ~/NDT-Prototype/Topology/deployment-l2s-m/config.yaml
