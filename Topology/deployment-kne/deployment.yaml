@@ -8,7 +8,7 @@
       shell: kne create ~/NDT-Prototype/Topology/Network/Topology.yaml  # Configure the path where the kne topology file is
 
     - name: config map
-      shell: #
+      shell: kubectl create configmap gateway2-config --from-file=$(echo ~/NDT-Prototype/Topology/Network/configuration/gateway2-config.py) -n network
 
     - name: Deploy gateway2
       shell: kubectl apply -f ~/NDT-Prototype/Topology/Network/gateway2.yaml

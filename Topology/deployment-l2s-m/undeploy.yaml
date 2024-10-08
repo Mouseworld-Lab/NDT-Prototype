@@ -6,21 +6,21 @@
     # --------------------------------------------Deploy kne--------------------------------------------
     # Configure the path where the kne topology file is deployed
 
-    - name: Deploy vxlan-1
+    - name: undeploy vxlan-1
       shell: microk8s kubectl delete -f ~/NDT-Prototype/Topology/Edge/vxlan-1.yaml
 
-    - name: Deploy network multus 
+    - name: undeploy network multus 
       shell: |
         microk8s kubectl delete -f ~/NDT-Prototype/Topology/Edge/v-network-1.yaml
         microk8s kubectl delete -f ~/NDT-Prototype/Topology/Edge/v-network-2.yaml
 
-    - name: Deploy ned
+    - name: undeploy ned
       shell: microk8s kubectl delete -f ~/NDT-Prototype/Topology/Edge/ned.yaml
 
-    - name: Deploy proxy
+    - name: undeploy proxy
       shell: microk8s kubectl delete -f ~/NDT-Prototype/Topology/Edge/proxy.yaml
 
-    - name: Deploy client
+    - name: undeploy client
       shell: microk8s kubectl delete -f ~/NDT-Prototype/Topology/Edge/client.yaml
 
     - name: Wait for 20 seconds
