@@ -60,6 +60,7 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 ![scenario](images/PrototypeNDT.png)
 
 # Demo
+![Watch the video](demo/Demo NDT PROTOTYPE.mp4)
 
 # NDT Deployment Guide
 The following steps provides a guide for deploying the NDT prototype, including the Edge. Before deploying the NDT prototype, it's necessary to establish connections between the machines. Follow the steps below:
@@ -129,7 +130,13 @@ ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/deployment.yaml
 ```bash
 ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/config.yaml
 ```
-    
+
+#### 4. To delete topology execute the `undeploy.yaml` file using the following command:
+
+```bash
+ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/undeploy.yaml
+```
+
     
 ## Deploy Edge using L2S-M
 
@@ -154,6 +161,12 @@ ansible-playbook ~/NDT-Prototype/Topology/deployment-l2s-m/deployment.yaml
 
 ```bash
 ansible-playbook ~/NDT-Prototype/Topology/deployment-l2s-m/config.yaml
+```
+
+#### 4. To delete pods execute the `undeploy.yaml` file using the following command:
+
+```bash
+ansible-playbook ~/NDT-Prototype/Topology/deployment-l2s-m/undeploy.yaml
 ```
 
 
