@@ -60,7 +60,10 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 ![scenario](images/PrototypeNDT.png)
 
 # Demo
-![Watch the video](demo/Demo NDT PROTOTYPE.mp4)
+## Demo Video
+
+[![Watch the video](https://img.youtube.com/vi/-JFqwM6fy0g/maxresdefault.jpg)](https://www.youtube.com/watch?v=-JFqwM6fy0g)
+
 
 # NDT Deployment Guide
 The following steps provides a guide for deploying the NDT prototype, including the Edge. Before deploying the NDT prototype, it's necessary to establish connections between the machines. Follow the steps below:
