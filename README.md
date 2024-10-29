@@ -1,8 +1,8 @@
-# First prototype of Network Digital Twin (NDT) including the Edge 
+# First prototype of an integrated Network Digital Twin (NDT) including the Edge 
 
 The technical features of the Demo deployment can be found in this repository. For this use case, the scenario is deployed on a container infrastructure using Kubernetes as the management tool.
 
-To emulate the behavioral aspects of the transport network equipment, KNE (Kubernetes Network Emulator by OpenConfig) has been used. Link-Layer Secure connectivity for Microservice platforms (L2S-M) is used to emulate the network edge.
+To emulate the behavioral aspects of the transport and core network environment, KNE (Kubernetes Network Emulator by OpenConfig) has been used. Link-Layer Secure connectivity for Microservice platforms (L2S-M) is used to emulate the network edge.
 
 
 # Table of Contents
@@ -48,14 +48,14 @@ This demo was tested on a microK8s cluster with the following configuration:
 
 
 # Overview of the Demo
-The purpose of this demo is to showcase the first prototype of a Network Digital Twin, including the Edge, using KNE and L2S-M, which are open-source projects. The demo involves deploying a network with a web server in the network and a client at the Edge, which will make web requests to the server. Additionally, a proxy will be deployed to handle requests from the client and forward them to the server. The main goal is to demonstrate that HTTP requests are visible at the Edge.
+The purpose of this demo is to showcase the first prototype of an edge-enabled Network Digital Twin, integrating two different twinning envirpnments, KNE and L2S-M, which are open-source projects. The demo involves deploying a network with a web server on the network twin infrastructure and a client at the Edge, which will make web requests to the server. Additionally, a proxy will be deployed as an edge service handling requests from the client and forwarding them to the server. The main goal is to demonstrate that secure connections can be enabled for any kind of devices, providing the secure gatweay as close to the device as required.
     
 1. **Components of the NDT:**
     - **KNE:** Used to emulate the Network. 
     - **L2S-M:** Used to emulate the Edge. 
 
 2. **Validation of the Demo**
-The demo demonstrates an HTTP request sent from the client at the Edge to the web server in the network. The request passes through a reverse proxy at the Edge, which converts the HTTP request to HTTPS. Consequently, the web server receives only HTTPS requests, while the client at the Edge operates over HTTP, ensuring secure communication between the Edge and the network.
+The demo demonstrates an HTTP request sent from the client at the Edge to the web server in the network. The request passes through a reverse proxy at the Edge, which converts the HTTP request to HTTPS. Consequently, the web server uses only HTTPS, while the client at the Edge operates over HTTP, ensuring secure communication between the Edge and the network, restricting any interaction in the open to the local environment.
 
 ![scenario](images/PrototypeNDT.png)
 
@@ -66,7 +66,7 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 
 
 # NDT Deployment Guide
-The following steps provides a guide for deploying the NDT prototype, including the Edge. Before deploying the NDT prototype, it's necessary to establish connections between the machines. Follow the steps below:
+The following steps provides a guide for deploying the NDT prototype, including the Edge. Before deploying the NDT prototype, it is necessary to establish connections between the machines. Follow the steps below:
 
 ## Configuration on the Machine Hosting KNE Pods:
 
