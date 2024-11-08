@@ -26,7 +26,7 @@ items:
     namespace: network
   spec:
     containers:
-    - image: ghcr.io/yennym3/gateway:latest
+    - image: ghcr.io/tefiros/ndt-prototype/gateway:latest
       name: pod
       command: ["sh", "-c", "sleep 2000000000000"]
       securityContext:
