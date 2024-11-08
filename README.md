@@ -101,7 +101,8 @@ The following steps provides a guide for deploying the NDT prototype, including 
     > **Note:** 
     > 1. Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
     > 2.  Has been tested on a cluster created with Kubeadm. 
-        >  **Note:**  
+    
+    >  **Note:**  
         If you plan to use this setup with other clusters, such as Kind, additional steps are required:
 
         ### 1. Create a VXLAN interface on the host machine where KNE is running:
