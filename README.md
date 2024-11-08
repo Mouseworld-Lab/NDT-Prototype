@@ -102,29 +102,28 @@ The following steps provides a guide for deploying the NDT prototype, including 
     > 1. Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
     > 2.  Has been tested on a cluster created with Kubeadm. 
     
-    >  **Note:**  
-        If you plan to use this setup with other clusters, such as Kind, additional steps are required:
+    If you plan to use this setup with other clusters, such as Kind, additional steps are required:
 
-        ### 1. Create a VXLAN interface on the host machine where KNE is running:
+    ### 1. Create a VXLAN interface on the host machine where KNE is running:
 
-        Run the following commands on the host machine to create and bring up the VXLAN interface:
+    Run the following commands on the host machine to create and bring up the VXLAN interface:
 
-        ```
-        sudo ip link add vxlan-1 type vxlan id 97 dev enp1s0 dstport 47 remote <remote-ip-host-L2S-M>
-        sudo ip link set vxlan-1 up
-        ```
+    ```
+    sudo ip link add vxlan-1 type vxlan id 97 dev enp1s0 dstport 47 remote <remote-ip-host-L2S-M>
+    sudo ip link set vxlan-1 up
+    ```
 
-        ### 2. Add the vxlan-1 interface to the bridge created by Kind (e.g., br-62xxxx)
-        ```
-        sudo brctl addif  br-6200aa9847f8 vxlan-1 
-        ```
+    ### 2. Add the vxlan-1 interface to the bridge created by Kind (e.g., br-62xxxx)
+    ```
+    sudo brctl addif  br-6200aa9847f8 vxlan-1 
+    ```
 
-        ### 3. Modify the peer_intf field in the gateway2.yaml file:
+    ### 3. Modify the peer_intf field in the gateway2.yaml file:
 
-        Update the *peer_intf* field to *eth0* in the gateway2.yaml file. This interface corresponds to the interface of the host created in Kind as the container's network interface.
-        ```
-        peer_intf: eth0
-        ```
+    Update the *peer_intf* field to *eth0* in the gateway2.yaml file. This interface corresponds to the interface of the host created in Kind as the container's network interface.
+    ```
+    peer_intf: eth0
+    ```
 
 ## Configuration on the Edge Machine:
 - #### Create a VXLAN Interface
