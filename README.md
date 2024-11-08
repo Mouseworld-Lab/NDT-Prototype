@@ -81,7 +81,7 @@ The following steps provides a guide for deploying the NDT prototype, including 
 - #### Create a VXLAN Interface
     Create a VXLAN interface with the following command, replacing <remote-ip> with the IP address of the remote host:
     ```
-    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote <remote-ip>
+    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote  <remote-ip-host-L2S-M>
     sudo ip link set vxlan-1 up
     ```
 - #### Create a Bridge and Add Interfaces:
@@ -109,7 +109,7 @@ The following steps provides a guide for deploying the NDT prototype, including 
     Run the following commands on the host machine to create and bring up the VXLAN interface:
 
     ```
-    sudo ip link add vxlan-1 type vxlan id 97 dev enp1s0 dstport 47 remote <remote-ip-host-L2S-M>
+    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote <remote-ip-host-L2S-M>
     sudo ip link set vxlan-1 up
     ```
 
@@ -129,7 +129,7 @@ The following steps provides a guide for deploying the NDT prototype, including 
 - #### Create a VXLAN Interface
     Create a VXLAN interface with the following command, replacing <remote-ip> with the IP address of the remote host:
     ```
-    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote <remote-ip>
+    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote  <remote-ip-host-KNE>
     sudo ip link set vxlan-1 up
     ```
     
