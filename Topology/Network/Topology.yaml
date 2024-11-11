@@ -157,7 +157,7 @@ nodes:
     config_path: /home/cognet
     config_file: gateway1-config.py
     file: /configuration/gateway1-config.py
-    image: ghcr.io/tefiros/ndt-prototype/gateway:latest
+    image: ghcr.io/yennym3/gateway:latest
   interfaces:
     eth1:
       name: Ethernet1
@@ -167,7 +167,7 @@ nodes:
     config_path: /home/cognet
     config_file: server-config.py
     file: /configuration/server-config.py
-    image: ghcr.io/tefiros/ndt-prototype/server:latest
+    image: ghcr.io/yennym3/server:latest
   interfaces:
     eth1:
       name: Ethernet1
