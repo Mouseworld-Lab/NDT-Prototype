@@ -120,21 +120,19 @@ The following steps provides a guide for deploying the NDT prototype, including 
 
     ### 3. Modify the peer_intf field in the gateway2.yaml file:
 
-    3.1 Update Network Interface (peer_intf)
+    3.1.  **Update Network Interface (peer_intf)**
+    
+    In the gateway2.yaml file, update the peer_intf field to use the network interface eth0. This interface corresponds to the host interface created in Kind and enables proper network connectivity for the container.
+    ```
+    peer_intf: eth0
+    ```
+    3.2.  **Update Image Pull Policy (imagePullPolicy)**
 
-        In the gateway2.yaml file, update the peer_intf field to use the network interface eth0. This interface corresponds to the host interface created in Kind and enables proper network connectivity for the container.
-        ```
-        peer_intf: eth0
-        ```
-
-    3.2. Update Image Pull Policy (imagePullPolicy)
-
-        In the gateway deployment file (gateway2.yaml), add the IfNotPresent image pull policy. This prevents re-downloading the image if it’s already available on the node, saving time and bandwidth for repeated deployments.
-        ```
-        image: ghcr.io/yennym3/gateway:latest
-        imagePullPolicy: IfNotPresent
-        ```
-
+    In the gateway deployment file (gateway2.yaml), add the IfNotPresent image pull policy. This prevents re-downloading the image if it’s already available on the node, saving time and bandwidth for repeated deployments.
+    ```
+    image: ghcr.io/yennym3/gateway:latest
+    imagePullPolicy: IfNotPresent
+    ```
     
 
 ## Configuration on the Edge Machine:
