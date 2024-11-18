@@ -148,7 +148,7 @@ ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/undeploy.yaml
     
 ### Deploy Edge using L2S-M
 
-Make sure your Kubernetes cluster is properly set up and that L2S-M is installed and operational. For comprehensive installation instructions, please refer to the official guide: L2S-M Installation Guide.
+Make sure your Kubernetes cluster is properly set up and that L2S-M is installed and operational. For comprehensive installation instructions, please refer to the official guide: [L2S-M](https://github.com/Networks-it-uc3m/L2S-M/tree/main/deployments)
 
 #### 1. Clone this repository from the cluster controller:
 ```bash
