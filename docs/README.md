@@ -1,5 +1,7 @@
-# NDT Deployment Guide
 The following steps provide a guide to deploy the NDT prototype (using cluster with Kind), including the Edge (using cluster microk8s). It is necessary to establish the connections between the network machines and the edge before deploying the steps. Follow the steps below:
+
+## Connection Between Machines with KNE and L2S-M
+### Configuration on the Machine Hosting KNE Pods:
 
 ### 1. Create a VXLAN interface on the host machine where KNE is running:
 
@@ -41,4 +43,5 @@ sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote  <remote-
 sudo ip link set vxlan-1 up
 ```
     
-Once you have configured the connection between the machines, you can continue with the guide to proceed with the deployment of the Demo [demo](/README.md)
+Once you have configured the connection between the machines, you can continue with the guide to proceed with the scenario [deployment](/README.md#scenario-deployment-on-machines-with-kne-and-l2s-m)
+
