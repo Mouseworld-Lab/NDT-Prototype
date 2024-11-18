@@ -66,9 +66,10 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 
 
 # NDT Deployment Guide
-The following steps provides a guide for deploying the NDT prototype, including the Edge. Before deploying the NDT prototype, it is necessary to establish connections between the machines. Follow the steps below:
+The following steps provide a guide to deploy the NDT prototype (using cluster with kubeadm), including the Edge (using cluster microk8s). It is necessary to establish the connections between the network machines and the edge before deploying the steps. Follow the steps below:
 
-## Configuration on the Machine Hosting KNE Pods:
+## Connection Between Machines with KNE and L2S-M
+### Configuration on the Machine Hosting KNE Pods:
 
 - #### Create a veth Pair
     Run the following commands to create a pair of virtual Ethernet interfaces:
@@ -102,40 +103,9 @@ The following steps provides a guide for deploying the NDT prototype, including 
     > 1. Only add one end of the veth pair because the other end (veth3) will be assigned to the gateway2 pod. For this demo, veth3 is already assigned in the Topology/Network/gateway2.yaml file.
     > 2.  Has been tested on a cluster created with Kubeadm. 
     
-    If you plan to use this setup with other clusters, such as Kind, additional steps are required:
+If you plan to deploy the network with KNE using a cluster such as Kind, follow this guide [Kind][docs](docs/README.md)
 
-    ### 1. Create a VXLAN interface on the host machine where KNE is running:
-
-    Run the following commands on the host machine to create and bring up the VXLAN interface:
-
-    ```
-    sudo ip link add vxlan-1 type vxlan id 96 dev enp1s0 dstport 47 remote <remote-ip-host-L2S-M>
-    sudo ip link set vxlan-1 up
-    ```
-
-    ### 2. Add the vxlan-1 interface to the bridge created by Kind (e.g., br-62xxxx)
-    ```
-    sudo brctl addif  br-6200aa9847f8 vxlan-1 
-    ```
-
-    ### 3. Modify the peer_intf field in the gateway2.yaml file:
-
-    3.1.  **Update Network Interface (peer_intf)**
-    
-    In the gateway2.yaml file, update the peer_intf field to use the network interface eth0. This interface corresponds to the host interface created in Kind and enables proper network connectivity for the container.
-    ```
-    peer_intf: eth0
-    ```
-    3.2.  **Update Image Pull Policy (imagePullPolicy)**
-
-    In the gateway deployment file (gateway2.yaml), add the IfNotPresent image pull policy. This prevents re-downloading the image if it’s already available on the node, saving time and bandwidth for repeated deployments.
-    ```
-    image: ghcr.io/yennym3/gateway:latest
-    imagePullPolicy: IfNotPresent
-    ```
-    
-
-## Configuration on the Edge Machine:
+### Configuration on the Edge Machine:
 - #### Create a VXLAN Interface
     Create a VXLAN interface with the following command, replacing <remote-ip> with the IP address of the remote host:
     ```
@@ -144,8 +114,10 @@ The following steps provides a guide for deploying the NDT prototype, including 
     ```
     
 Once you have configured the connection between the machines, you can continue with the guide to proceed with the deployment of the NDT prototype:
+ 
+##  Scenario Deployment on Machines with KNE and L2S-M
 
-##  Deploy Network using KNE 
+###  Deploy Network using KNE 
 
 To proceed with the next steps, you should have a functional Kubernetes cluster with KNE installed and operational for topology creation. For detailed installation instructions, please refer to the official guide in the repository [KNE](https://github.com/openconfig/kne/blob/main/docs/setup.md)
 
@@ -174,7 +146,7 @@ ansible-playbook ~/NDT-Prototype/Topology/deployment-kne/undeploy.yaml
 ```
 
     
-## Deploy Edge using L2S-M
+### Deploy Edge using L2S-M
 
 Make sure your Kubernetes cluster is properly set up and that L2S-M is installed and operational. For comprehensive installation instructions, please refer to the official guide: L2S-M Installation Guide.
 
