@@ -20,10 +20,14 @@ sudo brctl addif  br-6200aa9847f8 vxlan-1
 ### 3. Modify the peer_intf field in the gateway2.yaml file:
 
 3.1.  **Update Network Interface (peer_intf)**
+In the gateway2.yaml file, update the peer_intf field to eth0 for link 2, which refers to the connection between the pod and its host machine
 
-In the gateway2.yaml file, update the peer_intf field to use the network interface eth0. This interface corresponds to the host interface created in Kind and enables proper network connectivity for the container.
 ```
-peer_intf: eth0
+- uid: 2
+    peer_pod: localhost
+    local_intf: eth2
+    local_ip: 10.0.1.20/24
+    **peer_intf: eth0**
 ```
 3.2.  **Update Image Pull Policy (imagePullPolicy)**
 
