@@ -58,10 +58,11 @@ It is necessary to load the images used by the server, gateway and cEOS(routers)
 > NOTE: `ceos:latest` is the default image to use for a node of vendor
 > `ARISTA`. It's necessary to download the image from the official Arista website to access the cEOS image. In this demo, the tested version is 4.29.2F
 
-    ```bash
-    cat cEOS-lab-4.29.2F.tar | docker import - ceos
-    kind load docker-image ceos:latest --name=kne
-    ```
+
+```bash
+cat cEOS-lab-4.29.2F.tar | docker import - ceos
+kind load docker-image ceos:latest --name=kne
+```
 
 You can check a full list of images loaded in your `kind` cluster using:
 
