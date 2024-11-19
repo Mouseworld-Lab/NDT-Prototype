@@ -36,7 +36,38 @@ In the gateway deployment file (gateway2.yaml), add the IfNotPresent image pull 
 image: ghcr.io/yennym3/gateway:latest
 imagePullPolicy: IfNotPresent
 ```
-    
+### 4. Load images into a kind cluster
+It is necessary to load the images used by the server, gateway and cEOS(routers) in the network into a kind cluster there is a 3 step process:
+
+1. Pull the desired images:
+
+    ```bash
+    docker pull ghcr.io/yennym3/server:latest
+    docker pull ghcr.io/yennym3/gateway:latest
+    ```
+
+2. Load the images gatweway/server into the `kind` cluster:
+
+    ```bash
+    kind load docker-image ghcr.io/yennym3/server:latest --name=kne
+    kind load docker-image ghcr.io/yennym3/gateway:latest --name=kne
+    ```
+
+3. Load the cEOS (Arista) image into the kind cluster:
+
+> NOTE: `ceos:latest` is the default image to use for a node of vendor
+> `ARISTA`. It's necessary to download the image from the official Arista website to access the cEOS image. In this demo, the tested version is 4.29.2F
+
+    ```bash
+    cat cEOS-lab-4.29.2F.tar | docker import - ceos
+    kind load docker-image ceos:latest --name=kne
+    ```
+
+You can check a full list of images loaded in your `kind` cluster using:
+
+```bash
+docker exec -it kne-control-plane crictl images
+```
 
 ## Configuration on the Edge Machine:
 - #### Create a VXLAN Interface
