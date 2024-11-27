@@ -48,7 +48,7 @@ This demo was tested on a microK8s cluster with the following configuration:
 
 
 # Overview of the Demo
-The purpose of this demo is to showcase the first prototype of an edge-enabled Network Digital Twin, integrating two different twinning envirpnments, KNE and L2S-M, which are open-source projects. The demo involves deploying a network with a web server on the network twin infrastructure and a client at the Edge, which will make web requests to the server. Additionally, a proxy will be deployed as an edge service handling requests from the client and forwarding them to the server. The main goal is to demonstrate that secure connections can be enabled for any kind of devices, providing the secure gatweay as close to the device as required.
+The purpose of this demo is to showcase the first prototype of an edge-enabled Network Digital Twin, integrating two different twinning environments, KNE and L2S-M, which are open-source projects. The demo involves deploying a network with a web server on the network twin infrastructure and a client at the Edge, which will make web requests to the server. Additionally, a proxy will be deployed as an edge service handling requests from the client and forwarding them to the server. The main goal is to demonstrate that secure connections can be enabled for any kind of devices, providing the secure gatweay as close to the device as required.
     
 1. **Components of the NDT:**
     - **KNE:** Used to emulate the Network. 
