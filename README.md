@@ -46,7 +46,6 @@ This demo was tested on a microK8s cluster with the following configuration:
 - **Network Plugin**: Multus CNI.
 
 
-
 # Overview of the Demo
 The purpose of this demo is to showcase the first prototype of an edge-enabled Network Digital Twin, integrating two different twinning environments, KNE and L2S-M, which are open-source projects. The demo involves deploying a network with a web server on the network twin infrastructure and a client at the Edge, which will make web requests to the server. Additionally, a proxy will be deployed as an edge service handling requests from the client and forwarding them to the server. The main goal is to demonstrate that secure connections can be enabled for any kind of devices, providing the secure gatweay as close to the device as required.
     
@@ -66,9 +65,44 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 
 
 # NDT Deployment Guide
-The following steps provide a guide to deploy the NDT prototype (using cluster with kubeadm), including the Edge (using cluster microk8s). It is necessary to establish the connections between the network machines and the edge before deploying the steps. Follow the steps below:
+TThe following steps provide a guide to deploy the NDT prototype (using a cluster with kubeadm), including the Edge (using a microk8s cluster). On the machine where KNE will be executed, you must ensure the cluster and KNE are up and running. Follow the instructions provided in the official repository: [KNE GitHub Repository](https://github.com/openconfig/kne):
+
+## KNE
+### 1. Install the necessary packages to use KNE
+
+```bash
+Install go
+```
+``bash
+Install Docker
+```
+``bash
+Install kubectl
+```
+
+### 2. Deploy cluster configuration
+```bash
+kne deploy deploy/kne/enternal.yaml
+```
+
+### 3. Load images into a cluster
+It is necessary to load the cEOS (Arista) image into the node worker of the cluster:
+
+> NOTE: `ceos:latest` is the default image to use for a node of vendor
+> `ARISTA`. It's necessary to download the image from the official Arista website to access the cEOS image. In this demo, the tested version is 4.29.2F
+
+```bash
+cat cEOS-lab-4.29.2F.tar | docker import - ceos
+```
+
+## L2S-M
+
+On the machine where L2S-M will be executed, ensure that both the cluster and L2S-M are up and running. Follow the instructions provided in the official repository: [L2S-M GitHub Repository](https://github.com/Networks-it-uc3m/L2S-M/tree/main/deployments).
+
+Once the clusters with KNE and L2S-M are running, you can follow the steps below to create a connection between the two machines:
 
 ## Connection Between Machines with KNE and L2S-M
+
 ### Configuration on the Machine Hosting KNE Pods:
 
 - #### Create a veth Pair
