@@ -27,7 +27,7 @@ In the gateway2.yaml file, update the peer_intf field to eth0 for link 2, which 
     peer_pod: localhost
     local_intf: eth2
     local_ip: 10.0.1.20/24
-    **peer_intf: eth0**
+    peer_intf: eth0
 ```
 3.2.  **Update Image Pull Policy (imagePullPolicy)**
 

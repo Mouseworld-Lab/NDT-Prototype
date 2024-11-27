@@ -74,11 +74,11 @@ TThe following steps provide a guide to deploy the NDT prototype (using a cluste
 Install go
 ```
 
-``bash
+```bash
 Install Docker
 ```
 
-``bash
+```bash
 Install kubectl
 ```
 
