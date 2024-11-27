@@ -65,7 +65,7 @@ The demo demonstrates an HTTP request sent from the client at the Edge to the we
 
 
 # NDT Deployment Guide
-TThe following steps provide a guide to deploy the NDT prototype (using a cluster with kubeadm), including the Edge (using a microk8s cluster). On the machine where KNE will be executed, you must ensure the cluster and KNE are up and running. Follow the instructions provided in the official repository: [KNE GitHub Repository](https://github.com/openconfig/kne):
+TThe following steps provide a guide to deploy the NDT prototype (using a cluster with kubeadm), including the Edge (using a microk8s cluster). On the machine where KNE will be executed, you must ensure the cluster and KNE are up and running. Follow the instructions provided in the official repository: [KNE](https://github.com/openconfig/kne/tree/main/docs):
 
 ## KNE
 ### 1. Install the necessary packages to use KNE
@@ -73,9 +73,11 @@ TThe following steps provide a guide to deploy the NDT prototype (using a cluste
 ```bash
 Install go
 ```
+
 ``bash
 Install Docker
 ```
+
 ``bash
 Install kubectl
 ```
@@ -97,7 +99,7 @@ cat cEOS-lab-4.29.2F.tar | docker import - ceos
 
 ## L2S-M
 
-On the machine where L2S-M will be executed, ensure that both the cluster and L2S-M are up and running. Follow the instructions provided in the official repository: [L2S-M GitHub Repository](https://github.com/Networks-it-uc3m/L2S-M/tree/main/deployments).
+On the machine where L2S-M will be executed, ensure that both the cluster and L2S-M are up and running. Follow the instructions provided in the official repository: [L2S-M](https://github.com/Networks-it-uc3m/L2S-M/tree/main/deployments).
 
 Once the clusters with KNE and L2S-M are running, you can follow the steps below to create a connection between the two machines:
 
