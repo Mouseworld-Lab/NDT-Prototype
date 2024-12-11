@@ -1,5 +1,19 @@
 The following steps provide a guide to deploy the NDT prototype (using cluster with Kind), including the Edge (using cluster microk8s). It is necessary to establish the connections between the network machines and the edge before deploying the steps. Follow the steps below:
 
+You must first install the necessary packages, including KNE and Kind. For example previous steps required:
+### Install the necessary packages to use KNE
+
+- Install go
+- Install Docker
+- Install kubectl
+- Install kind
+
+### Deploy cluster configuration
+```bash
+kne deploy deploy/kne/kind-bridge.yaml
+```
+You can find more information in the official repository: [KNE](https://github.com/openconfig/kne). After successfully setting up KNE and Kind, you may move on to the next steps:
+
 ## Connection Between Machines with KNE and L2S-M
 ### Configuration on the Machine Hosting KNE Pods:
 
@@ -36,6 +50,7 @@ In the gateway deployment file (gateway2.yaml), add the IfNotPresent image pull 
 image: ghcr.io/yennym3/gateway:latest
 imagePullPolicy: IfNotPresent
 ```
+
 ### 4. Load images into a kind cluster
 It is necessary to load the images used by the server, gateway and cEOS(routers) in the network into a kind cluster there is a 3 step process:
 
